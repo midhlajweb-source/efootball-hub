@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk", sans-serif;
+    --font-body: "DM Sans", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --radius: 0.5rem;
+
+    /* Stadium Daylight — the light ("white") counterpart to Stadium Night.
+       Same hue family (green-tinted neutrals) and the same acid-lime / amber
+       accents, re-tuned for a bright pitch-side surface. */
+    --background: 0.985 0.004 150;
+    --foreground: 0.22 0.02 165;
+    --card: 1 0 0;
+    --card-foreground: 0.22 0.02 165;
+    --popover: 1 0 0;
+    --popover-foreground: 0.22 0.02 165;
+
+    /* Acid-lime, darkened so it reads on white while staying vivid */
+    --primary: 0.62 0.17 132;
+    --primary-foreground: 0.99 0.01 128;
+
+    --secondary: 0.955 0.008 155;
+    --secondary-foreground: 0.28 0.022 165;
+    --muted: 0.955 0.008 155;
+    --muted-foreground: 0.5 0.02 160;
+
+    /* Amber-orange: live / in-play urgency */
+    --accent: 0.68 0.17 52;
+    --accent-foreground: 0.99 0.01 52;
+
+    --destructive: 0.55 0.21 25;
+    --destructive-foreground: 0.99 0.01 22;
+
+    --success: 0.58 0.15 150;
+    --warning: 0.68 0.15 78;
+
+    --border: 0.9 0.008 160;
+    --input: 0.9 0.008 160;
+    --ring: 0.62 0.17 132;
+
+    --chart-1: 0.62 0.17 132;
+    --chart-2: 0.68 0.17 52;
+    --chart-3: 0.55 0.14 235;
+    --chart-4: 0.58 0.15 150;
+    --chart-5: 0.55 0.18 320;
+
+    --sidebar: 0.97 0.006 155;
+    --sidebar-foreground: 0.24 0.02 165;
+    --sidebar-primary: 0.62 0.17 132;
+    --sidebar-primary-foreground: 0.99 0.01 128;
+    --sidebar-accent: 0.93 0.01 155;
+    --sidebar-accent-foreground: 0.28 0.022 165;
+    --sidebar-border: 0.89 0.008 160;
+    --sidebar-ring: 0.62 0.17 132;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.62 0.17 132),
+      oklch(0.56 0.15 152)
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.97 0.008 155 / 0.9),
+      oklch(0.985 0.004 150 / 0.2)
+    );
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --pitch-line-alpha: 0.08;
+  }
+
+  .dark {
+    /* Stadium Night — the original dark identity, preserved exactly. */
+    --background: 0.16 0.018 165;
+    --foreground: 0.95 0.012 150;
+    --card: 0.2 0.02 165;
+    --card-foreground: 0.95 0.012 150;
+    --popover: 0.22 0.022 165;
+    --popover-foreground: 0.95 0.012 150;
+
+    --primary: 0.86 0.21 128;
+    --primary-foreground: 0.18 0.03 128;
+
+    --secondary: 0.25 0.022 165;
+    --secondary-foreground: 0.88 0.012 150;
+    --muted: 0.24 0.02 165;
+    --muted-foreground: 0.62 0.018 155;
+
+    --accent: 0.72 0.19 52;
+    --accent-foreground: 0.17 0.03 52;
+
+    --destructive: 0.58 0.21 22;
+    --destructive-foreground: 0.97 0.01 22;
+
+    --success: 0.72 0.17 148;
+    --warning: 0.78 0.16 82;
+
+    --border: 0.3 0.024 165;
+    --input: 0.3 0.024 165;
+    --ring: 0.86 0.21 128;
+
+    --chart-1: 0.86 0.21 128;
+    --chart-2: 0.72 0.19 52;
+    --chart-3: 0.66 0.14 220;
+    --chart-4: 0.7 0.17 148;
+    --chart-5: 0.62 0.2 320;
+
+    --sidebar: 0.13 0.016 165;
+    --sidebar-foreground: 0.93 0.012 150;
+    --sidebar-primary: 0.86 0.21 128;
+    --sidebar-primary-foreground: 0.16 0.02 128;
+    --sidebar-accent: 0.22 0.022 165;
+    --sidebar-accent-foreground: 0.88 0.012 150;
+    --sidebar-border: 0.26 0.022 165;
+    --sidebar-ring: 0.86 0.21 128;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.86 0.21 128),
+      oklch(0.78 0.19 150)
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.22 0.022 165 / 0.9),
+      oklch(0.16 0.018 165 / 0.2)
+    );
+    --pitch-line-alpha: 0.045;
+  }
+
+  * {
+    @apply border-border;
+  }
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+
+  /* Pitch-line grid texture: the signature background for hero + section anchors.
+     The line alpha is a token so light mode can use a stronger stroke. */
+  .bg-pitch-lines {
+    background-image: linear-gradient(
+        oklch(var(--foreground) / var(--pitch-line-alpha, 0.045)) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        oklch(var(--foreground) / var(--pitch-line-alpha, 0.045)) 1px,
+        transparent 1px
+      );
+    background-size: 56px 56px;
+  }
+
+  .text-gradient-primary {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Tabular alignment for scores, points, GF/GA columns */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+}

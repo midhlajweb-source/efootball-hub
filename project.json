@@ -1,0 +1,20 @@
+{
+  "overview": "A tournament hub for eFootball competitions with league tables, knockout brackets, match status, and admin result entry.",
+  "features": [
+    "Switch between dark and white themes from the nav bar",
+    "See the best goal-scoring teams ranked",
+    "See the best goal-conceding teams ranked",
+    "Track league tables and knockout brackets",
+    "Follow live, upcoming, and completed matches",
+    "Manage teams, fixtures, and results as an admin"
+  ],
+  "category": "sports",
+  "tags": [
+    "football",
+    "tournament",
+    "sports",
+    "leaderboard",
+    "theme"
+  ],
+  "last_updated": "2026-09-20T15:42:49.967Z"
+}

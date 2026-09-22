@@ -1,0 +1,206 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type AdminSession__151841872 = {token : Text; username : Text};
+type AdminSession__159791620 = {token : Text; username : Text};
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type FixtureId__122646934 = FixtureId__217866022;
+type FixtureId__217866022 = Nat;
+type FixtureId__443701997 = FixtureId__217866022;
+type Fixture__340958842 =
+  {
+    awayGoals : ?Nat;
+    awayTeamId : Nat;
+    homeGoals : ?Nat;
+    homeTeamId : Nat;
+    id : Nat;
+    kickoff : Int;
+    matchday : Nat;
+    status : MatchStatus__478058867
+  };
+type Fixture__863382927 =
+  {
+    awayGoals : ?Nat;
+    awayTeamId : TeamId__645029084;
+    homeGoals : ?Nat;
+    homeTeamId : TeamId__645029084;
+    id : FixtureId__122646934;
+    kickoff : Timestamp__650092736;
+    matchday : Nat;
+    status : MatchStatus__969611265
+  };
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type KnockoutRound__1034428865 =
+  {#final; #quarterFinal; #roundOf16; #semiFinal};
+type KnockoutRound__398244689 =
+  {#final; #quarterFinal; #roundOf16; #semiFinal};
+type KnockoutTie__10103164 =
+  {
+    awayGoals : ?Nat;
+    awayPenalties : ?Nat;
+    awayTeamId : ?TeamId__645029084;
+    homeGoals : ?Nat;
+    homePenalties : ?Nat;
+    homeTeamId : ?TeamId__645029084;
+    id : TieId__497409579;
+    round : KnockoutRound__1034428865;
+    slot : Nat;
+    winnerTeamId : ?TeamId__645029084
+  };
+type KnockoutTie__503752793 =
+  {
+    awayGoals : ?Nat;
+    awayTeamId : ?Nat;
+    homeGoals : ?Nat;
+    homeTeamId : ?Nat;
+    id : Nat;
+    round : KnockoutRound__398244689;
+    slot : Nat;
+    winnerTeamId : ?Nat
+  };
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type MatchStatus__478058867 = {#completed; #live; #upcoming};
+type MatchStatus__969611265 = {#completed; #live; #upcoming};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__407567843 =
+  {
+    accessControlState : AccessControlState__201339279;
+    tournamentState : TournamentState__560670137
+  };
+type NewActor__612403947 =
+  {
+    accessControlState : AccessControlState__201339279;
+    tournamentState :
+      {
+        fixtures : Map__230067015<Nat, OldFixture__111927518>;
+        var nextFixtureId : Nat;
+        var nextSessionId : Nat;
+        var nextTeamId : Nat;
+        var nextTieId : Nat;
+        sessions : Map__230067015<Text, OldAdminSession__1070906777>;
+        var stageLabel : Text;
+        teams : Map__230067015<Nat, OldTeam__172290728>;
+        ties : Map__230067015<Nat, NewKnockoutTie__314913944>;
+        var tournamentName : Text
+      }
+  };
+type NewKnockoutTie__314913944 =
+  {
+    awayGoals : ?Nat;
+    awayPenalties : ?Nat;
+    awayTeamId : ?Nat;
+    homeGoals : ?Nat;
+    homePenalties : ?Nat;
+    homeTeamId : ?Nat;
+    id : Nat;
+    round : OldKnockoutRound__700852400;
+    slot : Nat;
+    winnerTeamId : ?Nat
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type OldActor__1046588177 = {};
+type OldActor__561969790 =
+  {
+    accessControlState : AccessControlState__201339279;
+    tournamentState :
+      {
+        fixtures : Map__230067015<Nat, OldFixture__111927518>;
+        var nextFixtureId : Nat;
+        var nextSessionId : Nat;
+        var nextTeamId : Nat;
+        var nextTieId : Nat;
+        sessions : Map__230067015<Text, OldAdminSession__1070906777>;
+        var stageLabel : Text;
+        teams : Map__230067015<Nat, OldTeam__172290728>;
+        ties : Map__230067015<Nat, OldKnockoutTie__469292017>;
+        var tournamentName : Text
+      }
+  };
+type OldAdminSession__1070906777 = {token : Text; username : Text};
+type OldFixture__111927518 =
+  {
+    awayGoals : ?Nat;
+    awayTeamId : Nat;
+    homeGoals : ?Nat;
+    homeTeamId : Nat;
+    id : Nat;
+    kickoff : Int;
+    matchday : Nat;
+    status : OldMatchStatus__1060132677
+  };
+type OldKnockoutRound__700852400 =
+  {#final; #quarterFinal; #roundOf16; #semiFinal};
+type OldKnockoutTie__469292017 =
+  {
+    awayGoals : ?Nat;
+    awayTeamId : ?Nat;
+    homeGoals : ?Nat;
+    homeTeamId : ?Nat;
+    id : Nat;
+    round : OldKnockoutRound__700852400;
+    slot : Nat;
+    winnerTeamId : ?Nat
+  };
+type OldMatchStatus__1060132677 = {#completed; #live; #upcoming};
+type OldTeam__172290728 =
+  {crestUrl : ?Text; id : Nat; name : Text; shortCode : Text};
+type TeamId__184294403 = TeamId__900592005;
+type TeamId__645029084 = TeamId__900592005;
+type TeamId__900592005 = Nat;
+type Team__715131614 =
+  {crestUrl : ?Text; id : Nat; name : Text; shortCode : Text};
+type Team__90580833 =
+  {crestUrl : ?Text; id : TeamId__645029084; name : Text; shortCode : Text};
+type TieId__497409579 = TieId__635177400;
+type TieId__635177400 = Nat;
+type TieId__847520791 = TieId__635177400;
+type Timestamp__301639476 = Int;
+type Timestamp__650092736 = Timestamp__301639476;
+type TournamentState__560670137 =
+  {
+    fixtures : Map__230067015<Nat, Fixture__340958842>;
+    var nextFixtureId : Nat;
+    var nextSessionId : Nat;
+    var nextTeamId : Nat;
+    var nextTieId : Nat;
+    sessions : Map__230067015<Text, AdminSession__159791620>;
+    var stageLabel : Text;
+    teams : Map__230067015<Nat, Team__715131614>;
+    ties : Map__230067015<Nat, KnockoutTie__503752793>;
+    var tournamentName : Text
+  };
+type UserRole__91647283 = {#admin; #guest; #user};
+{
+  "20260920_120000" : (_old : OldActor__1046588177) -> NewActor__407567843;
+  "20260920_140000" : (old : OldActor__561969790) -> NewActor__612403947
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable tournamentState :
+    {
+      fixtures : Map__230067015<FixtureId__443701997, Fixture__863382927>;
+      var nextFixtureId : Nat;
+      var nextSessionId : Nat;
+      var nextTeamId : Nat;
+      var nextTieId : Nat;
+      sessions : Map__230067015<Text, AdminSession__151841872>;
+      var stageLabel : Text;
+      teams : Map__230067015<TeamId__184294403, Team__90580833>;
+      ties : Map__230067015<TieId__847520791, KnockoutTie__10103164>;
+      var tournamentName : Text
+    }
+};

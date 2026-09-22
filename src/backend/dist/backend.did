@@ -1,0 +1,231 @@
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type TournamentState = 
+ record {
+   stageLabel: text;
+   tournamentName: text;
+ };
+type Timestamp = int;
+type TieView = 
+ record {
+   awayGoals: opt nat;
+   awayPenalties: opt nat;
+   awayTeamName: opt text;
+   homeGoals: opt nat;
+   homePenalties: opt nat;
+   homeTeamName: opt text;
+   id: TieId;
+   round: KnockoutRound;
+   slot: nat;
+   winnerTeamName: opt text;
+ };
+type TieId = nat;
+type TeamId = nat;
+type Team = 
+ record {
+   crestUrl: opt text;
+   id: TeamId;
+   name: text;
+   shortCode: text;
+ };
+type Result__1 = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type Result_5 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result_4 = 
+ variant {
+   err: AdminError;
+   ok: vec Fixture;
+ };
+type Result_3 = 
+ variant {
+   err: AdminError;
+   ok: KnockoutTie;
+ };
+type Result_2 = 
+ variant {
+   err: AdminError;
+   ok;
+ };
+type Result_1 = 
+ variant {
+   err: AdminError;
+   ok: Fixture;
+ };
+type Result = 
+ variant {
+   err: AdminError;
+   ok: Team;
+ };
+type MatchView = 
+ record {
+   awayGoals: opt nat;
+   awayTeamName: text;
+   homeGoals: opt nat;
+   homeTeamName: text;
+   id: FixtureId;
+   kickoff: Timestamp;
+   matchday: nat;
+   status: MatchStatus;
+ };
+type MatchStatus = 
+ variant {
+   completed;
+   live;
+   upcoming;
+ };
+type LeagueRow = 
+ record {
+   drawn: nat;
+   goalDifference: int;
+   goalsAgainst: nat;
+   goalsFor: nat;
+   lost: nat;
+   played: nat;
+   points: nat;
+   shortCode: text;
+   teamId: TeamId;
+   teamName: text;
+   won: nat;
+ };
+type KnockoutTie = 
+ record {
+   awayGoals: opt nat;
+   awayPenalties: opt nat;
+   awayTeamId: opt TeamId;
+   homeGoals: opt nat;
+   homePenalties: opt nat;
+   homeTeamId: opt TeamId;
+   id: TieId;
+   round: KnockoutRound;
+   slot: nat;
+   winnerTeamId: opt TeamId;
+ };
+type KnockoutRound = 
+ variant {
+   final;
+   quarterFinal;
+   roundOf16;
+   semiFinal;
+ };
+type FixtureId = nat;
+type Fixture = 
+ record {
+   awayGoals: opt nat;
+   awayTeamId: TeamId;
+   homeGoals: opt nat;
+   homeTeamId: TeamId;
+   id: FixtureId;
+   kickoff: Timestamp;
+   matchday: nat;
+   status: MatchStatus;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type BracketRoundView = 
+ record {
+   round: KnockoutRound;
+   ties: vec TieView;
+ };
+type AdminSession = 
+ record {
+   token: text;
+   username: text;
+ };
+type AdminError = 
+ variant {
+   invalidCredentials;
+   invalidInput: text;
+   notAuthenticated;
+   notFound;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result_5);
+  _internet_identity_sign_in_start: () -> (blob);
+  adminLogin: (username: text, password: text) -> (opt AdminSession);
+  adminLogout: (token: text) -> (bool);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  createFixture: (token: text, homeTeamId: TeamId, awayTeamId: TeamId,
+   matchday: nat, kickoff: Timestamp) -> (Result_1);
+  createKnockoutTie: (token: text, round: KnockoutRound, slot: nat,
+   homeTeamId: opt TeamId, awayTeamId: opt TeamId) -> (Result_3);
+  createTeam: (token: text, name: text, shortCode: text, crestUrl:
+   opt text) -> (Result);
+  deleteFixture: (token: text, id: FixtureId) -> (Result_2);
+  deleteKnockoutTie: (token: text, id: TieId) -> (Result_2);
+  deleteTeam: (token: text, id: TeamId) -> (Result_2);
+  execute: (qJson: text) -> (Result__1) query;
+  generateRoundRobinFixtures: (token: text) -> (Result_4);
+  getApiDoc: () -> (text) query;
+  getBracket: () -> (vec BracketRoundView) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getLeagueTable: () -> (vec LeagueRow) query;
+  getMatch: (id: FixtureId) -> (opt MatchView) query;
+  getStatusMatches: () ->
+   (record {
+      completed: vec MatchView;
+      live: vec MatchView;
+      upcoming: vec MatchView;
+    }) query;
+  getTournamentState: () -> (TournamentState) query;
+  isAdminSession: (token: text) -> (bool) query;
+  isCallerAdmin: () -> (bool) query;
+  listFixtures: () -> (vec Fixture) query;
+  listKnockoutTies: () -> (vec KnockoutTie) query;
+  listTeams: () -> (vec Team) query;
+  schema: () -> (text) query;
+  setFixtureResult: (token: text, id: FixtureId, homeGoals: opt nat,
+   awayGoals: opt nat, status: MatchStatus) -> (Result_1);
+  setKnockoutResult: (token: text, id: TieId, homeGoals: opt nat, awayGoals:
+   opt nat, homePenalties: opt nat, awayPenalties: opt nat) -> (Result_3);
+  setStageLabel: (token: text, stageLabel: text) -> (Result_2);
+  updateFixture: (token: text, id: FixtureId, homeTeamId: TeamId, awayTeamId:
+   TeamId, matchday: nat, kickoff: Timestamp) -> (Result_1);
+  updateTeam: (token: text, id: TeamId, name: text, shortCode: text,
+   crestUrl: opt text) -> (Result);
+}
